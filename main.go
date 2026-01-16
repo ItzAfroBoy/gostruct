@@ -1,3 +1,4 @@
+// A go implementation of Python's Struct module
 package gostruct
 
 import (
@@ -7,6 +8,8 @@ import (
 	"strings"
 )
 
+// Unpack buffer using format string.
+// Returns array containing parsed data
 func Unpack(format string, buffer []byte) []any {
 	var bin_func binary.ByteOrder
 	var arr_ret []any
@@ -55,6 +58,9 @@ func Unpack(format string, buffer []byte) []any {
 	return arr_ret
 }
 
+// Unpack buffer using format string.
+// Populates v using reflect. 
+// Buffer contents must match amount of struct fields
 func UnpackToStruct(format string, buffer []byte, v any) {
 	unpacked := Unpack(format, buffer)
 	e := reflect.ValueOf(v).Elem()
